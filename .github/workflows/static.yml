@@ -28,11 +28,14 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env: 
+      RTS_DEMO_APIKEY : 'bGg9an5tZmW9NgiHqiHj0m656POFOqEdImCDAj_v6kw'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - run: sed -i -e "s/__LION_APIKEY_PRD_PLACEHOLDER__/$RTS_DEMO_APIKEY/g" {}
       - run: npm install
       - run: npm run build
       - name: Upload artifact
