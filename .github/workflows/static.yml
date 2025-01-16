@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - run: find . -type f -exec sed -i -e "s/__LION_APIKEY_PRD_PLACEHOLDER__/$RTS_DEMO_APIKEY/g" config.js
+      - run: sed -i "s/__LION_APIKEY_PRD_PLACEHOLDER__/$RTS_DEMO_APIKEY/g" config.js
       - run: npm install
       - run: npm run build
       - name: Upload artifact
