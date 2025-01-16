@@ -22,27 +22,34 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
+  # Build job
+  build:
+    # Specify runner +  build & upload the static files as an artifact
+    runs-on: ubuntu-latest
+    env:
+      RTS_DEMO_APIKEY: "bGg9an5tZmW9NgiHqiHj0m656POFOqEdImCDAj_v6kw"
+    steps:
+      - name: Build static files
+        id: build
+        run: |
+          sed -i "s/__LION_APIKEY_PRD_PLACEHOLDER__/$RTS_DEMO_APIKEY/g" config.js
+          npm install
+          npm run build
+
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+        with:
+          path: .
+
+  # Deployment job
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    env: 
-      RTS_DEMO_APIKEY : 'bGg9an5tZmW9NgiHqiHj0m656POFOqEdImCDAj_v6kw'
+    needs: build
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - run: sed -i "s/__LION_APIKEY_PRD_PLACEHOLDER__/$RTS_DEMO_APIKEY/g" config.js
-      - run: npm install
-      - run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
