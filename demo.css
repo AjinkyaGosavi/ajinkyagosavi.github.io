@@ -1,0 +1,56 @@
+body,
+html {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+    background: grey;
+}
+
+#rtsControlUI {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#urlTemplateUI {
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    background: #000;
+    color: #cbdace;
+}
+
+#urlTemplate {
+    margin: 2px;
+    width: 300px;
+    resize: none;
+    field-sizing: content;
+    border: 2px;
+    background-color: #808080;
+    color: #f0f0f0;
+}
+
+[data-title]:hover:after {
+    visibility: visible;
+}
+
+[data-title]:after {
+    content: attr(data-title);
+    background-color: #808080;
+    color: #f0f0f0;
+    position: absolute;
+    padding: 4px 8px 4px 8px;
+    visibility: hidden;
+    right: 100%;
+    white-space: nowrap;
+}
+
+.info {
+    color: #ffffff;
+    text-decoration: none !important;
+}

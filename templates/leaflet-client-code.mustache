@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <title>Client Code - HERE Map with Leaflet</title>
+
+  <!-- Link to Leaflet CSS for styling the map -->
+  <link rel="stylesheet" href="http://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    body {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      margin: 0px;
+    }
+  </style>
+</head>
+
+<body onload="initialize_map()">
+  <!-- Div element to contain the map. -->
+  <div id="my_map_div" style="width: 100%; height: 100%"></div>
+
+  <!-- Link to Leaflet JavaScript library -->
+  <script src="http://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    function initialize_map() {
+      // Center map at specific location and zoom level
+      let map = L.map("my_map_div").setView([{{ latLng }}], {{ zoom }});
+
+      // URL template for HERE map tiles
+      // {z} - zoom level, {x} - tile x coordinate, {y} - tile y coordinate
+      let url =
+        "https://maps.hereapi.com/v3/{{ resource }}/mc/{z}/{x}/{y}/{{ format }}";
+
+      // Append additional query parameters
+      url += "{{{ queryParamsString }}}";
+      L.tileLayer(url, {
+        maxZoom: 18,
+        attribution: "&copy;{{ year }} HERE Technologies",
+      }).addTo(map);
+    }
+  </script>
+</body>
+
+</html>

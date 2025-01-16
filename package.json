@@ -1,0 +1,17 @@
+{
+    "name": "rts-example-demo",
+    "version": "1.0.0",
+    "description": "HERE Raster Tile API Example",
+    "main": "demo.js",
+    "scripts": {
+        "build": "browserify demo.js -o out/demo.js"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "dat.gui": "^0.7.7",
+        "mustache": "^4.2.0"
+    },
+    "devDependencies": {
+        "browserify": "^16.5.1"
+    }
+}
