@@ -22,7 +22,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  - name: Checkoutuses: actions/checkout@v4
   # Build job
   build:
     # Specify runner +  build & upload the static files as an artifact
