@@ -22,6 +22,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  - name: Checkoutuses: actions/checkout@v4
   # Build job
   build:
     # Specify runner +  build & upload the static files as an artifact
@@ -29,6 +30,8 @@ jobs:
     env:
       RTS_DEMO_APIKEY: "bGg9an5tZmW9NgiHqiHj0m656POFOqEdImCDAj_v6kw"
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Build static files
         id: build
         run: |
