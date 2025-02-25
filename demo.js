@@ -31,7 +31,7 @@ var positionMapAndControlUI = () => {
         rtsControlUIElement = document.getElementById("rtsControlUI");
 
     if (rtsControlUIElement) {
-        if (window.location.href.endsWith("demo.html")) {
+        // if (window.location.href.endsWith("demo.html")) {
             if (mapElement) {
                 // Updating `map` size depending on available view port
                 let mapParentElement = mapElement.parentNode;
@@ -62,9 +62,9 @@ var positionMapAndControlUI = () => {
                 lightThemeCssElement.disabled =
                     lightThemeButtonElement.length != 0 ? true : false;
             }
-        } else {
-            rtsControlUIElement.style.display = "none";
-        }
+        // } else {
+        //     rtsControlUIElement.style.display = "none";
+        // }
     }
 };
 
