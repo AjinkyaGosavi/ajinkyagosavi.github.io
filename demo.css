@@ -6,35 +6,18 @@ html {
 }
 
 #map {
-    width: 100vw;
-    height: 100vh;
+    width: 1000px;
+    height: 1000px;
+    /* width: 100vw;
+    height: 100vh; */
     background: grey;
 }
 
 #rtsControlUI {
     position: absolute;
-    top: 0;
-    right: 0;
 }
 
-#urlTemplateUI {
-    position: fixed;
-    top: 60px;
-    left: 10px;
-    background: #000;
-    color: #cbdace;
-}
-
-#urlTemplate {
-    margin: 2px;
-    width: 300px;
-    resize: none;
-    field-sizing: content;
-    border: 2px;
-    background-color: #808080;
-    color: #f0f0f0;
-}
-
+/* Control UI - Tooltip */
 [data-title]:hover:after {
     visibility: visible;
 }
@@ -44,13 +27,20 @@ html {
     background-color: #808080;
     color: #f0f0f0;
     position: absolute;
-    padding: 4px 8px 4px 8px;
+    padding: 0px 4px 0px 4px;
     visibility: hidden;
-    right: 100%;
+    left: 100%;
     white-space: nowrap;
+    z-index: 10;
 }
 
+/* Control UI - Info icon */
 .info {
     color: #ffffff;
     text-decoration: none !important;
+}
+
+/* Control UI - Copy to clipboard icon */
+.copyToClipboard {
+    font-size: large;
 }
