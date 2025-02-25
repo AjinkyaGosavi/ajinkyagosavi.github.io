@@ -31,12 +31,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build static files
-        id: build
-        run: |
-          sed -i "s/__LION_APIKEY_PRD_PLACEHOLDER__/$RTS_DEMO_APIKEY/g" config.js
-          npm install
-          npm run build
 
       - name: Upload static files as artifact
         id: deployment
