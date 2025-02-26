@@ -1110,6 +1110,10 @@ var RasterTileService = class RasterTileService {
                 .toLowerCase()
                 .split(" ")
                 .reduce((s, c) => s + (c.charAt(0).toUpperCase() + c.slice(1)));
+        } else {
+            labelTextContent =
+                labelTextContent.charAt(0).toLowerCase() +
+                labelTextContent.slice(1);
         }
 
         controllerLabelElement.setAttribute(
