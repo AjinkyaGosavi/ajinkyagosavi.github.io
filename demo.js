@@ -21,7 +21,7 @@ var updateMapState = () => {
 
     rts.preset = rts.presets[0];
 
-    rts.mapStateTextBox.updateDisplay();
+    // rts.mapStateTextBox.updateDisplay();
     rts.presetsDropDown.updateDisplay();
 };
 
@@ -32,36 +32,35 @@ var positionMapAndControlUI = () => {
 
     if (rtsControlUIElement) {
         // if (window.location.href.endsWith("demo.html")) {
-            if (mapElement) {
-                // Updating `map` size depending on available view port
-                let mapParentElement = mapElement.parentNode;
-                mapElement.style.height = mapParentElement.offsetHeight + "px";
-                mapElement.style.width = mapParentElement.offsetWidth + "px";
-                rts.map.getViewPort().resize(); // Map resize to utilize available space
+        if (mapElement) {
+            // Updating `map` size depending on available view port
+            let mapParentElement = mapElement.parentNode;
+            mapElement.style.height = mapParentElement.offsetHeight + "px";
+            mapElement.style.width = mapParentElement.offsetWidth + "px";
+            rts.map.getViewPort().resize(); // Map resize to utilize available space
 
-                // Positioning control UI w.r.t. map
-                rtsControlUIElement.style.display = "block";
+            // Positioning control UI w.r.t. map
+            rtsControlUIElement.style.display = "block";
 
-                let mapElementBounds = mapElement.getBoundingClientRect();
-                rtsControlUIElement.style.left =
-                    mapElementBounds.left - 1 + "px";
-                rtsControlUIElement.style.top = mapElementBounds.top - 1 + "px";
+            let mapElementBounds = mapElement.getBoundingClientRect();
+            rtsControlUIElement.style.left = mapElementBounds.left - 1 + "px";
+            rtsControlUIElement.style.top = mapElementBounds.top - 1 + "px";
 
-                setTimeout(function () {
-                    if (mapElement) {
-                        mapElement.click();
-                    }
-                }, 1);
-            }
+            setTimeout(function () {
+                if (mapElement) {
+                    mapElement.click();
+                }
+            }, 1);
+        }
 
-            // Setting light vs dark theme for Control UI based on availability of theme option button
-            let lightThemeButtonElement =
-                    document.getElementsByClassName("ico-light-mode"),
-                lightThemeCssElement = document.getElementById("lightTheme");
-            if (lightThemeCssElement) {
-                lightThemeCssElement.disabled =
-                    lightThemeButtonElement.length != 0 ? true : false;
-            }
+        // Setting light vs dark theme for Control UI based on availability of theme option button
+        let lightThemeButtonElement =
+                document.getElementsByClassName("ico-light-mode"),
+            lightThemeCssElement = document.getElementById("lightTheme");
+        if (lightThemeCssElement) {
+            lightThemeCssElement.disabled =
+                lightThemeButtonElement.length != 0 ? true : false;
+        }
         // } else {
         //     rtsControlUIElement.style.display = "none";
         // }
@@ -432,8 +431,8 @@ var RasterTileService = class RasterTileService {
             this.searchTextBoxDomElement =
             this.urlTemplateTextBox =
             this.urlTemplateTextBoxDomElement =
-            this.mapStateTextBox =
-            this.mapStateTextBoxDomElement =
+            // this.mapStateTextBox =
+            // this.mapStateTextBoxDomElement =
             this.setMapStateTextBox =
             this.pathParamsFolder =
             this.resourceDropdown =
@@ -533,6 +532,11 @@ var RasterTileService = class RasterTileService {
                 this.buildParamsString(this.apiKey)
             )
         );
+    }
+
+    copyParameters() {
+        console.log("inside copyParameters()...");
+        navigator.clipboard.writeText(this.mapState);
     }
 
     resetParameters() {
@@ -911,13 +915,11 @@ var RasterTileService = class RasterTileService {
         this.searchTextBoxDomElement.placeholder =
             "lat,lng[,zoom] or z/x/y or tileId";
 
-        this.mapStateTextBox = this.locationFolder
-            .add(this, "mapState")
-            .name("Map state");
-        this.mapStateTextBoxDomElement = this.mapStateTextBox.domElement;
-        this.mapStateTextBoxDomElement.firstChild.disabled = true;
-        this.mapStateTextBoxDomElement.firstChild.style.color = "#b6681e";
-        this.addCopyToClipboardIcon(this.mapStateTextBoxDomElement, "mapState");
+        this.locationFolder.add(this, "copyParameters").name("Copy parameters");
+        // this.mapStateTextBoxDomElement = this.mapStateTextBox.domElement;
+        // this.mapStateTextBoxDomElement.firstChild.disabled = true;
+        // this.mapStateTextBoxDomElement.firstChild.style.color = "#b6681e";
+        // this.addCopyToClipboardIcon(this.mapStateTextBoxDomElement, "mapState");
 
         this.setMapStateTextBox = this.locationFolder
             .add(this, "setMapState")
@@ -1119,7 +1121,7 @@ var RasterTileService = class RasterTileService {
     addToolTipsAndInfoIcons() {
         // Location folder
         this.addToolTip(this.searchTextBox);
-        this.addToolTip(this.mapStateTextBox);
+        // this.addToolTip(this.mapStateTextBox);
         this.addToolTip(this.setMapStateTextBox);
 
         // Path parameters folder
