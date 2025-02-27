@@ -445,7 +445,6 @@ var RasterTileService = class RasterTileService {
             this.searchTextBoxDomElement =
             this.pasteParametersButton =
             this.urlTemplateTextBox =
-            this.urlTemplateTextBoxDomElement =
             this.pathParamsFolder =
             this.resourceDropdown =
             this.formatDropdown =
@@ -918,9 +917,7 @@ var RasterTileService = class RasterTileService {
         this.pasteParametersButton = this.locationFolder
             .add(this, "pasteParameters")
             .name("Paste parameters");
-        let pasteParametersParentDomElement =
-            this.pasteParametersButton.domElement;
-        pasteParametersParentDomElement.addEventListener(
+        this.pasteParametersButton.domElement.addEventListener(
             "click",
             pasteParametersEvent
         );
@@ -934,11 +931,13 @@ var RasterTileService = class RasterTileService {
         this.urlTemplateTextBox = this.exportFolder
             .add(this, "urlTemplate")
             .name("URL template");
-        this.urlTemplateTextBoxDomElement = this.urlTemplateTextBox.domElement;
-        this.urlTemplateTextBoxDomElement.firstChild.disabled = true;
-        this.urlTemplateTextBoxDomElement.firstChild.style.color = "#b6681e";
+        let urlTemplateTextBoxDomElement = this.urlTemplateTextBox.domElement,
+            urlTemplateWidget =
+                urlTemplateTextBoxDomElement.querySelectorAll(".widget")[0];
+        urlTemplateWidget.disabled = true;
+        urlTemplateWidget.style.color = "#b6681e";
         this.addCopyToClipboardIcon(
-            this.urlTemplateTextBoxDomElement,
+            urlTemplateTextBoxDomElement,
             "urlTemplate"
         );
 
