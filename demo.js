@@ -1286,7 +1286,7 @@ var RasterTileService = class RasterTileService {
         // Update map state
         this.map.addEventListener("mapviewchangeend", updateMapState);
 
-        window.addEventListener("scroll", scrollEventListener);
+        // window.addEventListener("scroll", scrollEventListener);
     }
 
     buildQueryParamsString(apiKey) {
